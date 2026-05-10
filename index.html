@@ -1,763 +1,435 @@
-<!-- ==========================================
-     SCHEMA MARKUP — Paste in WordPress <head>
-     ========================================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Final Grade Calculator – Find Out What You Need to Pass</title>
+  <meta name="description" content="Free final grade calculator. Enter your current grade, final exam weight, and desired grade to instantly find out what score you need on your final exam." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
-<!-- 1. WebPage Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Final Grade Calculator – What Score Do You Need to Pass",
-  "description": "Use this final grade calculator to find out exactly what score you need on your final exam to pass or get the grade you want. Enter your current grade and exam weight get your answer in seconds. Free, no sign-up.",
-  "url": "https://gradescalculate.com/final-grade-calculator/",
-  "inLanguage": "en",
-  "isPartOf": { "@type": "WebSite", "name": "Grade Calculator", "url": "https://gradescalculate.com/" },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gradescalculate.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Final Grade Calculator", "item": "https://gradescalculate.com/final-grade-calculator/" }
-    ]
-  }
-}
-</script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-light: #14b8a6;
+      --teal-dark: #0f766e;
+      --teal-faint: #f0fdfa;
+      --teal-border: #99f6e4;
+      --text: #0f172a;
+      --muted: #64748b;
+      --bg: #f8fffe;
+      --white: #ffffff;
+      --red: #ef4444;
+      --green: #16a34a;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(13,148,136,0.10);
+    }
 
-<!-- 2. Article Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Final Grade Calculator – What Score Do You Need to Pass",
-  "description": "Use this final grade calculator to find out exactly what score you need on your final exam to pass or get the grade you want.",
-  "url": "https://gradescalculate.com/final-grade-calculator/",
-  "inLanguage": "en",
-  "author": { "@type": "Organization", "name": "Grade Calculator", "url": "https://gradescalculate.com/" },
-  "publisher": { "@type": "Organization", "name": "Grade Calculator", "url": "https://gradescalculate.com/" },
-  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://gradescalculate.com/final-grade-calculator/" },
-  "about": { "@type": "Thing", "name": "Final Grade Calculator" }
-}
-</script>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<!-- 3. SoftwareApplication Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Final Grade Calculator",
-  "description": "A free online final grade calculator that helps students estimate their course grade. Enter your current grade, exam weight, and target grade to see the score needed on your final exam.",
-  "url": "https://gradescalculate.com/final-grade-calculator/",
-  "applicationCategory": "EducationalApplication",
-  "operatingSystem": "Web Browser",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "featureList": ["Calculate final course grade","Determine score needed on final exam","Weighted grade calculation","Export grade report"],
-  "audience": { "@type": "EducationalAudience", "educationalRole": "student" }
-}
-</script>
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-<!-- 4. BreadcrumbList Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gradescalculate.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Final Grade Calculator", "item": "https://gradescalculate.com/final-grade-calculator/" }
-  ]
-}
-</script>
+    /* NAV */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--teal-border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--teal-dark);
+      text-decoration: none;
+    }
+    .nav-link {
+      font-size: 0.85rem;
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 500;
+      border: 1.5px solid var(--teal-border);
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .nav-link:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
 
-<!-- 5. FAQPage Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "How much do I need on my final exam to pass?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on your current grade and how much your final exam is worth. Enter both values into the final grade calculator above and it will show you the exact score needed." } },
-    { "@type": "Question", "name": "How much is my final exam worth?", "acceptedAnswer": { "@type": "Answer", "text": "Most courses assign between 20% and 50% to the final exam. Check your course syllabus to find the exact weight." } },
-    { "@type": "Question", "name": "What would my final grade be if I score X on the exam?", "acceptedAnswer": { "@type": "Answer", "text": "Enter your current grade, exam weight, and your expected exam score into the calculator. It will show your projected final course grade instantly." } },
-    { "@type": "Question", "name": "How much do I need on my final to get an A?", "acceptedAnswer": { "@type": "Answer", "text": "Enter your current grade, exam weight, and set your target as 90% or 93%. The calculator will show the exact score needed." } },
-    { "@type": "Question", "name": "What is a final grade calculator?", "acceptedAnswer": { "@type": "Answer", "text": "A final grade calculator is a tool that estimates your overall course grade based on your current scores and the weight of the final exam." } },
-    { "@type": "Question", "name": "How do I calculate my final grade?", "acceptedAnswer": { "@type": "Answer", "text": "Multiply each assessment score by its percentage weight and add the results together. An online final grade calculator does this automatically." } },
-    { "@type": "Question", "name": "What grade do I need on my final exam?", "acceptedAnswer": { "@type": "Answer", "text": "The grade you need depends on your current course average and the weight of the final exam. A final grade calculator determines the minimum exam score required." } },
-    { "@type": "Question", "name": "How much does the final exam affect my grade?", "acceptedAnswer": { "@type": "Answer", "text": "In many classes, the final exam contributes between 30% and 50% of the overall grade depending on the course." } },
-    { "@type": "Question", "name": "Can a final grade calculator predict my exact grade?", "acceptedAnswer": { "@type": "Answer", "text": "It provides an estimate based on values entered. The actual grade may vary if additional assignments or grading adjustments are included by the instructor." } }
-  ]
-}
-</script>
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 3.5rem 1rem 2rem;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: var(--teal-faint);
+      border: 1px solid var(--teal-border);
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+    h1 span { color: var(--teal); }
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
 
+    /* CARD */
+    .card-wrap {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 1rem 3rem;
+    }
+    .card {
+      background: var(--white);
+      border: 1.5px solid var(--teal-border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      width: 100%;
+      max-width: 560px;
+    }
 
-<!-- ==========================================
-     CALCULATOR TOOL — Paste in page <body>
-     ========================================== -->
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    /* INPUTS */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin-bottom: 6px;
+      font-family: 'DM Mono', monospace;
+    }
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    input[type="number"] {
+      width: 100%;
+      border: 1.5px solid #d1fae5;
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      font-size: 1rem;
+      font-family: 'DM Mono', monospace;
+      background: var(--teal-faint);
+      color: var(--text);
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+    input[type="number"]:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(13,148,136,0.12);
+    }
+    .suffix {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
 
-<style>
-/* ---- RESET & ROOT ---- */
-.fgc * , .fgc *::before, .fgc *::after { box-sizing: border-box; margin: 0; padding: 0; }
-.fgc {
-  --teal:        #17A99A;
-  --teal-dark:   #0d8a7d;
-  --teal-deeper: #085e55;
-  --teal-light:  #e8f8f7;
-  --teal-pale:   #f0faf9;
-  --orange:      #e07b00;
-  --red:         #ef4444;
-  --red-light:   #fef2f2;
-  --text:        #0f172a;
-  --text2:       #475569;
-  --text3:       #94a3b8;
-  --border:      #d0ecea;
-  --surface:     #ffffff;
-  --surface2:    #f0faf9;
-  --shadow:      0 2px 12px rgba(23,169,154,0.10);
-  --shadow-lg:   0 8px 32px rgba(23,169,154,0.15);
-  --radius:      14px;
-  --radius-sm:   10px;
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text);
-  width: 100%;
-}
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: var(--teal-border);
+      margin: 1.5rem 0;
+    }
 
-/* ---- STAT CARDS ---- */
-.fgc-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.fgc-stat {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px 12px;
-  box-shadow: var(--shadow);
-  position: relative;
-  overflow: hidden;
-}
-.fgc-stat::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--teal), var(--teal-dark));
-  border-radius: 0 0 var(--radius) var(--radius);
-}
-.fgc-stat-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); margin-bottom: 5px; }
-.fgc-stat-val { font-size: 1.35rem; font-weight: 800; color: var(--text); line-height: 1; font-family: 'JetBrains Mono', monospace; transition: color 0.3s; }
-.fgc-stat-hint { font-size: 10px; color: var(--text3); margin-top: 4px; }
+    /* BUTTON */
+    button.calc-btn {
+      width: 100%;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 14px;
+      font-size: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.1s;
+      position: relative;
+      overflow: hidden;
+    }
+    button.calc-btn:hover { background: var(--teal-dark); }
+    button.calc-btn:active { transform: scale(0.98); }
 
-/* ---- MAIN CARD ---- */
-.fgc-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin-bottom: 12px;
-  overflow: hidden;
-}
+    /* RESULT */
+    #result {
+      margin-top: 1.5rem;
+      display: none;
+      animation: fadeUp 0.35s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .result-box {
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+    }
+    .result-box.good  { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+    .result-box.bad   { background: #fff1f2; border: 1.5px solid #fecdd3; }
+    .result-label {
+      font-size: 0.75rem;
+      font-family: 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .result-score {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .result-box.good .result-score { color: var(--green); }
+    .result-box.bad  .result-score { color: var(--red); }
+    .result-message {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
 
-/* Table header */
-.fgc-tbl-head {
-  display: grid;
-  grid-template-columns: 2fr 70px 90px 70px 36px;
-  gap: 6px;
-  padding: 10px 14px;
-  background: var(--surface2);
-  border-bottom: 1.5px solid var(--border);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text3);
-}
-.fgc-tbl-head span { text-align: center; }
-.fgc-tbl-head span:first-child { text-align: left; }
+    /* FORMULA SECTION */
+    .formula-section {
+      margin-top: 2rem;
+      background: var(--teal-faint);
+      border: 1px dashed var(--teal-border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+    .formula-section h3 {
+      font-size: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--teal-dark);
+      margin-bottom: 0.75rem;
+    }
+    .formula-section p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .formula {
+      font-family: 'DM Mono', monospace;
+      background: var(--white);
+      border: 1px solid var(--teal-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      color: var(--teal-dark);
+      margin: 0.75rem 0;
+      display: block;
+      line-height: 1.6;
+    }
 
-/* Row */
-.fgc-row {
-  display: grid;
-  grid-template-columns: 2fr 70px 90px 70px 36px;
-  gap: 6px;
-  padding: 10px 14px;
-  border-bottom: 1.5px solid var(--border);
-  align-items: center;
-  animation: fgcIn 0.22s ease;
-  transition: background 0.15s;
-}
-.fgc-row:last-child { border-bottom: none; }
-.fgc-row:hover { background: #fafffe; }
-@keyframes fgcIn { from { opacity:0; transform:translateY(-5px); } to { opacity:1; transform:translateY(0); } }
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem 2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--teal-border);
+    }
+    footer a {
+      color: var(--teal);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
 
-.fgc-name-cell { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.fgc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.fgc-name-inp {
-  background: transparent; border: none; color: var(--text);
-  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
-  width: 100%; outline: none; min-width: 0; overflow: hidden; text-overflow: ellipsis;
-}
-.fgc-name-inp:focus { color: var(--teal-dark); }
+    /* ABOUT SECTION */
+    .about {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 0 1rem 2.5rem;
+    }
+    .about h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .about p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+    .about a { color: var(--teal); font-weight: 600; text-decoration: none; }
+    .about a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
 
-.fgc-num-inp {
-  background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px;
-  color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
-  padding: 7px 4px; text-align: center; width: 100%; outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  -moz-appearance: textfield;
-}
-.fgc-num-inp::-webkit-outer-spin-button,
-.fgc-num-inp::-webkit-inner-spin-button { -webkit-appearance: none; }
-.fgc-num-inp:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(23,169,154,0.12); background: #fff; }
+  <nav>
+    <a class="nav-logo" href="#">🎓 GradeCalc</a>
+    <a class="nav-link" href="https://gradescalculate.com" target="_blank" rel="noopener">More Calculators →</a>
+  </nav>
 
-.fgc-del {
-  background: transparent; border: 1.5px solid var(--border); border-radius: 7px;
-  color: var(--text3); cursor: pointer; font-size: 16px;
-  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
-  transition: all 0.18s; padding: 0; flex-shrink: 0;
-}
-.fgc-del:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+  <section class="hero">
+    <div class="hero-tag">Free Tool · No Signup</div>
+    <h1>What Score Do You Need<br>on Your <span>Final Exam?</span></h1>
+    <p class="hero-sub">Enter your current grade, the exam's weight, and your target grade — we'll tell you exactly what to aim for.</p>
+  </section>
 
-/* Weight bar */
-.fgc-wbar-wrap { padding: 12px 14px; border-top: 1.5px solid var(--border); background: var(--surface2); }
-.fgc-wbar-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.fgc-wbar-lbl { font-size: 11px; font-weight: 600; color: var(--text2); }
-.fgc-wbar-val { font-size: 11px; font-weight: 700; color: var(--teal); font-family: 'JetBrains Mono', monospace; }
-.fgc-wbar-track { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
-.fgc-wbar-fill { height: 100%; border-radius: 99px; background: var(--teal); transition: width 0.4s, background 0.3s; }
+  <div class="card-wrap">
+    <div class="card">
 
-/* Add button */
-.fgc-add-btn {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  width: calc(100% - 28px); margin: 12px 14px;
-  background: transparent; border: 1.5px dashed var(--border);
-  border-radius: var(--radius-sm); color: var(--text3); cursor: pointer;
-  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
-  padding: 10px; transition: all 0.2s;
-}
-.fgc-add-btn:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-pale); }
-
-/* ---- WHAT SCORE NEEDED BOX ---- */
-.fgc-needed-box {
-  background: var(--surface); border: 1.5px solid var(--border);
-  border-radius: var(--radius); box-shadow: var(--shadow);
-  padding: 16px 18px; margin-bottom: 12px;
-}
-.fgc-needed-title { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
-
-/* Two-column: left = inputs, right = result */
-.fgc-needed-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; }
-.fgc-needed-fields { display: flex; flex-direction: column; gap: 10px; }
-.fgc-field label { display: block; font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06px; margin-bottom: 5px; }
-.fgc-field input {
-  width: 100%; padding: 9px 12px;
-  border: 1.5px solid var(--border); border-radius: 9px;
-  font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;
-  color: var(--text); background: var(--teal-pale); outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  -moz-appearance: textfield;
-}
-.fgc-field input::-webkit-outer-spin-button,
-.fgc-field input::-webkit-inner-spin-button { -webkit-appearance: none; }
-.fgc-field input:focus { border-color: var(--teal); background: #fff; box-shadow: 0 0 0 3px rgba(23,169,154,0.1); }
-
-.fgc-needed-result {
-  background: linear-gradient(135deg, var(--teal), var(--teal-deeper));
-  border-radius: 12px; padding: 18px 14px; text-align: center;
-  min-height: 110px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-}
-.fgc-needed-result-lbl { color: rgba(255,255,255,0.75); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-.fgc-needed-result-score { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 800; color: white; line-height: 1; }
-.fgc-needed-result-sub { color: rgba(255,255,255,0.65); font-size: 10px; margin-top: 6px; line-height: 1.4; }
-
-/* ---- CHARTS ---- */
-.fgc-chart-card {
-  background: var(--surface); border: 1.5px solid var(--border);
-  border-radius: var(--radius); box-shadow: var(--shadow);
-  padding: 16px 18px; margin-bottom: 12px;
-}
-.fgc-chart-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 14px; }
-.fgc-charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.fgc-chart-box { position: relative; height: 200px; width: 100%; min-width: 0; }
-
-/* ---- RESULT CARD ---- */
-.fgc-result-card {
-  background: var(--surface); border: 1.5px solid var(--border);
-  border-radius: var(--radius); box-shadow: var(--shadow);
-  padding: 16px 18px; margin-bottom: 12px;
-  display: none; animation: fgcIn 0.35s ease;
-}
-.fgc-result-inner { display: flex; align-items: center; gap: 14px; }
-.fgc-grade-circle {
-  width: 58px; height: 58px; border-radius: 50%; border: 2.5px solid;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.15rem; font-weight: 800; flex-shrink: 0; transition: all 0.3s;
-  font-family: 'JetBrains Mono', monospace;
-}
-.fgc-result-info h3 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
-.fgc-result-info p { font-size: 12px; color: var(--text2); line-height: 1.5; }
-
-/* ---- EACH GRADE NEEDED ROW ---- */
-.fgc-grades-needed {
-  background: var(--surface); border: 1.5px solid var(--border);
-  border-radius: var(--radius); box-shadow: var(--shadow);
-  padding: 14px 18px; margin-bottom: 12px; display: none;
-}
-.fgc-grades-needed-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
-.fgc-grades-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-.fgc-grade-cell {
-  background: var(--surface2); border: 1.5px solid var(--border);
-  border-radius: 10px; padding: 10px 4px; text-align: center;
-}
-.fgc-gc-letter { font-size: 15px; font-weight: 800; margin-bottom: 3px; font-family: 'JetBrains Mono', monospace; }
-.fgc-gc-score { font-size: 10px; color: var(--text3); font-weight: 600; }
-
-/* ---- ACTIONS ---- */
-.fgc-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
-.fgc-btn {
-  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
-  padding: 12px 16px; border-radius: var(--radius-sm); cursor: pointer;
-  border: 1.5px solid; transition: all 0.2s; width: 100%;
-}
-.fgc-btn-reset { background: var(--surface); border-color: var(--border); color: var(--text2); }
-.fgc-btn-reset:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
-.fgc-btn-export { background: linear-gradient(135deg, var(--teal), var(--teal-dark)); border-color: var(--teal); color: #fff; box-shadow: 0 4px 14px rgba(23,169,154,0.28); }
-.fgc-btn-export:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(23,169,154,0.38); }
-
-/* ---- MOBILE ---- */
-@media (max-width: 540px) {
-  .fgc-stats { grid-template-columns: 1fr 1fr; }
-  .fgc-stats .fgc-stat:last-child { grid-column: span 2; }
-  .fgc-stat-val { font-size: 1.1rem; }
-
-  /* Hide desktop table header */
-  .fgc-tbl-head { display: none; }
-
-  /* Row becomes card */
-  .fgc-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 36px;
-    grid-template-rows: auto auto;
-    gap: 7px;
-    padding: 12px;
-  }
-  .fgc-name-cell { grid-column: span 4; margin-bottom: 2px; }
-  .fgc-inp-wrap { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-  .fgc-inp-lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); }
-  .fgc-del-wrap { display: flex; align-items: flex-end; }
-  .fgc-del { width: 34px; height: 34px; }
-
-  /* Needed box stacks */
-  .fgc-needed-inner { grid-template-columns: 1fr; gap: 12px; }
-  .fgc-needed-result { min-height: 80px; }
-  .fgc-needed-result-score { font-size: 30px; }
-
-  /* Charts stack */
-  .fgc-charts-grid { grid-template-columns: 1fr; }
-  .fgc-chart-box { height: 210px; }
-
-  /* Grades needed 3 col */
-  .fgc-grades-row { grid-template-columns: repeat(3, 1fr); }
-
-  /* Actions stack */
-  .fgc-actions { grid-template-columns: 1fr; }
-  .fgc-btn { padding: 13px; font-size: 14px; }
-
-  .fgc-result-inner { gap: 10px; }
-  .fgc-grade-circle { width: 50px; height: 50px; font-size: 1rem; }
-}
-
-@media (min-width: 541px) {
-  .fgc-inp-wrap { display: contents; }
-  .fgc-inp-lbl { display: none; }
-  .fgc-del-wrap { display: contents; }
-}
-
-@media (max-width: 360px) {
-  .fgc-stats { grid-template-columns: 1fr; }
-  .fgc-stats .fgc-stat:last-child { grid-column: span 1; }
-}
-</style>
-
-<div class="fgc">
-
-  <!-- STAT CARDS -->
-  <div class="fgc-stats">
-    <div class="fgc-stat">
-      <div class="fgc-stat-lbl">Current</div>
-      <div class="fgc-stat-val" id="fgc-s-current">—</div>
-      <div class="fgc-stat-hint">Weighted so far</div>
-    </div>
-    <div class="fgc-stat">
-      <div class="fgc-stat-lbl">Projected</div>
-      <div class="fgc-stat-val" id="fgc-s-final">—</div>
-      <div class="fgc-stat-hint">Final grade</div>
-    </div>
-    <div class="fgc-stat">
-      <div class="fgc-stat-lbl">Letter</div>
-      <div class="fgc-stat-val" id="fgc-s-letter">—</div>
-      <div class="fgc-stat-hint">Your grade</div>
-    </div>
-  </div>
-
-  <!-- COMPONENTS TABLE -->
-  <div class="fgc-card">
-    <div class="fgc-tbl-head">
-      <span>Component</span>
-      <span>Weight %</span>
-      <span>Score Got</span>
-      <span>Out of</span>
-      <span></span>
-    </div>
-    <div id="fgc-rows"></div>
-    <div class="fgc-wbar-wrap">
-      <div class="fgc-wbar-top">
-        <span class="fgc-wbar-lbl">Total Weight</span>
-        <span class="fgc-wbar-val" id="fgc-wbar-lbl">0%</span>
-      </div>
-      <div class="fgc-wbar-track">
-        <div class="fgc-wbar-fill" id="fgc-wbar-fill" style="width:0%"></div>
-      </div>
-    </div>
-    <button class="fgc-add-btn" onclick="fgcAddRow()">
-      <span style="font-size:18px;font-weight:300;line-height:1;">+</span> Add Component
-    </button>
-  </div>
-
-  <!-- WHAT SCORE DO I NEED -->
-  <div class="fgc-needed-box">
-    <div class="fgc-needed-title">🎯 What score do I need on my final exam?</div>
-    <div class="fgc-needed-inner">
-      <div class="fgc-needed-fields">
-        <div class="fgc-field">
-          <label>Current Grade (%)</label>
-          <input type="number" id="fgc-ex-current" placeholder="e.g. 72" min="0" max="100" oninput="fgcCalcExam()">
+      <div class="field-group">
+        <div class="field">
+          <label>Current Grade</label>
+          <div class="input-row">
+            <input type="number" id="currentGrade" placeholder="e.g. 78" min="0" max="100" />
+            <span class="suffix">%</span>
+          </div>
         </div>
-        <div class="fgc-field">
-          <label>Target Grade (%)</label>
-          <input type="number" id="fgc-ex-target" placeholder="e.g. 80" min="0" max="100" oninput="fgcCalcExam()">
+
+        <div class="field">
+          <label>Final Exam Weight</label>
+          <div class="input-row">
+            <input type="number" id="finalWeight" placeholder="e.g. 40" min="1" max="100" />
+            <span class="suffix">% of total grade</span>
+          </div>
         </div>
-        <div class="fgc-field">
-          <label>Exam Weight (%)</label>
-          <input type="number" id="fgc-ex-weight" placeholder="e.g. 35" min="1" max="100" oninput="fgcCalcExam()">
+
+        <div class="field">
+          <label>Desired Final Grade</label>
+          <div class="input-row">
+            <input type="number" id="desiredGrade" placeholder="e.g. 80" min="0" max="100" />
+            <span class="suffix">%</span>
+          </div>
         </div>
       </div>
-      <div class="fgc-needed-result">
-        <div class="fgc-needed-result-lbl">Score Needed</div>
-        <div class="fgc-needed-result-score" id="fgc-ex-score">—</div>
-        <div class="fgc-needed-result-sub" id="fgc-ex-sub">Enter values to calculate</div>
+
+      <button class="calc-btn" onclick="calculate()">Calculate Required Score</button>
+
+      <div id="result">
+        <div class="divider"></div>
+        <div class="result-box" id="resultBox">
+          <div class="result-label">You need at least</div>
+          <div class="result-score" id="resultScore">—</div>
+          <div class="result-message" id="resultMessage"></div>
+        </div>
+      </div>
+
+      <div class="formula-section">
+        <h3>How It's Calculated</h3>
+        <p>The formula used by this final grade calculator:</p>
+        <code class="formula">Required = (Desired Grade − Current Grade × (1 − Exam Weight)) ÷ Exam Weight</code>
+        <p>For example, if your current grade is <strong>78%</strong>, the final is worth <strong>40%</strong>, and you want a <strong>80%</strong> — you need <strong>83.3%</strong> on the final.</p>
       </div>
     </div>
   </div>
 
-  <!-- CHARTS -->
-  <div class="fgc-chart-card">
-    <div class="fgc-chart-lbl">Score Breakdown</div>
-    <div class="fgc-charts-grid">
-      <div class="fgc-chart-box"><canvas id="fgcBarChart"></canvas></div>
-      <div class="fgc-chart-box"><canvas id="fgcPieChart"></canvas></div>
-    </div>
-  </div>
+  <section class="about">
+    <h2>About This Calculator</h2>
+    <p>
+      This <strong>final grade calculator</strong> helps students quickly find out what score they need on their final exam to achieve their desired overall course grade. It works for any grading system where your final exam is worth a percentage of your total grade.
+    </p>
+    <p>
+      Need more academic tools? Visit <a href="https://gradescalculate.com" target="_blank" rel="noopener">GradesCalculate.com</a> for a full suite of grade calculators including GPA calculators, weighted grade calculators, and more — all free, no signup required.
+    </p>
+    <p>
+      Whether you're in high school, college, or university, knowing your target exam score helps you study smarter and manage your time effectively during finals season.
+    </p>
+  </section>
 
-  <!-- RESULT CARD -->
-  <div class="fgc-result-card" id="fgc-result-card">
-    <div class="fgc-result-inner">
-      <div class="fgc-grade-circle" id="fgc-grade-circle"></div>
-      <div class="fgc-result-info">
-        <h3 id="fgc-res-heading"></h3>
-        <p id="fgc-res-msg"></p>
-      </div>
-    </div>
-  </div>
+  <footer>
+    Powered by <a href="https://gradescalculate.com" target="_blank" rel="noopener">GradesCalculate.com</a> — Free Grade Calculators for Students
+  </footer>
 
-  <!-- GRADES NEEDED -->
-  <div class="fgc-grades-needed" id="fgc-grades-needed">
-    <div class="fgc-grades-needed-lbl">Score needed on remaining components to achieve each grade</div>
-    <div class="fgc-grades-row" id="fgc-grades-row"></div>
-  </div>
+  <script>
+    function calculate() {
+      const current = parseFloat(document.getElementById('currentGrade').value);
+      const weight  = parseFloat(document.getElementById('finalWeight').value) / 100;
+      const desired = parseFloat(document.getElementById('desiredGrade').value);
 
-  <!-- ACTIONS -->
-  <div class="fgc-actions">
-    <button class="fgc-btn fgc-btn-reset" onclick="fgcResetAll()">↺ Reset All</button>
-    <button class="fgc-btn fgc-btn-export" onclick="fgcExport()">⬇ Export Result</button>
-  </div>
+      const resultDiv  = document.getElementById('result');
+      const resultBox  = document.getElementById('resultBox');
+      const resultScore = document.getElementById('resultScore');
+      const resultMsg  = document.getElementById('resultMessage');
 
-</div>
-
-<script>
-(function(){
-  var PALETTE = ['#17A99A','#0d8a7d','#085e55','#0891b2','#059669','#14b8a6','#2dd4bf','#06b6d4'];
-  var GRADES  = [
-    {l:'A+',min:90,c:'#17A99A'},{l:'A',min:80,c:'#0d8a7d'},
-    {l:'B+',min:75,c:'#0891b2'},{l:'B',min:70,c:'#2563eb'},
-    {l:'C', min:60,c:'#d97706'},{l:'D',min:50,c:'#ea580c'},
-    {l:'F', min:0, c:'#ef4444'}
-  ];
-  var MSGS = {
-    'A+':['Outstanding Performance!','You are at the top of the class. Keep it up!'],
-    'A': ['Excellent Result!','Outstanding work. You should be proud!'],
-    'B+':['Very Good!','Above average. A little more effort for an A!'],
-    'B': ['Good Job!','Solid performance. Push a little harder for a B+!'],
-    'C': ['Passing Grade.','Average result. Focus more on your next exams!'],
-    'D': ['Barely Passing.','You are in the risk zone. Improve on your final exam!'],
-    'F': ['Not Passing.','Talk to your teacher and make a study plan!']
-  };
-
-  var rows = [], nid = 0, bChart = null, pChart = null;
-
-  function getLetter(s) {
-    for (var i=0;i<GRADES.length;i++) if (s>=GRADES[i].min) return GRADES[i];
-    return GRADES[GRADES.length-1];
-  }
-
-  function fgcInit() {
-    rows = [
-      {id:nid++, name:'Assignments',  w:30, got:'', tot:100},
-      {id:nid++, name:'Midterm Exam', w:30, got:'', tot:100},
-      {id:nid++, name:'Final Exam',   w:40, got:'', tot:100}
-    ];
-    fgcRender();
-  }
-
-  window.fgcAddRow = function() {
-    rows.push({id:nid++, name:'New Component', w:0, got:'', tot:100});
-    fgcRender();
-  };
-
-  window.fgcDelRow = function(id) {
-    if (rows.length <= 1) return;
-    rows = rows.filter(function(r){ return r.id !== id; });
-    fgcRender();
-  };
-
-  window.fgcUpd = function(id, field, val) {
-    var r = rows.find(function(r){ return r.id === id; });
-    if (!r) return;
-    r[field] = field === 'name' ? val : (val === '' ? '' : (parseFloat(val) || 0));
-    fgcCalc();
-  };
-
-  function fgcRender() {
-    var c = document.getElementById('fgc-rows');
-    c.innerHTML = '';
-    rows.forEach(function(row, i) {
-      var col = PALETTE[i % PALETTE.length];
-      var d = document.createElement('div');
-      d.className = 'fgc-row';
-      d.innerHTML =
-        '<div class="fgc-name-cell">' +
-          '<span class="fgc-dot" style="background:'+col+'"></span>' +
-          '<input class="fgc-name-inp" value="'+row.name+'" onchange="fgcUpd('+row.id+',\'name\',this.value)"/>' +
-        '</div>' +
-        '<div class="fgc-inp-wrap">' +
-          '<span class="fgc-inp-lbl">Weight %</span>' +
-          '<input class="fgc-num-inp" type="number" min="0" max="100" value="'+row.w+'" oninput="fgcUpd('+row.id+',\'w\',this.value)"/>' +
-        '</div>' +
-        '<div class="fgc-inp-wrap">' +
-          '<span class="fgc-inp-lbl">Score Got</span>' +
-          '<input class="fgc-num-inp" type="number" min="0" value="'+(row.got)+'" placeholder="—" oninput="fgcUpd('+row.id+',\'got\',this.value)"/>' +
-        '</div>' +
-        '<div class="fgc-inp-wrap">' +
-          '<span class="fgc-inp-lbl">Out of</span>' +
-          '<input class="fgc-num-inp" type="number" min="1" value="'+row.tot+'" oninput="fgcUpd('+row.id+',\'tot\',this.value)"/>' +
-        '</div>' +
-        '<div class="fgc-del-wrap">' +
-          (rows.length > 1
-            ? '<button class="fgc-del" onclick="fgcDelRow('+row.id+')">&#xD7;</button>'
-            : '<div></div>') +
-        '</div>';
-      c.appendChild(d);
-    });
-    fgcCalc();
-  }
-
-  function fgcCalc() {
-    var tw = rows.reduce(function(s,r){ return s+(parseFloat(r.w)||0); }, 0);
-
-    // Weight bar
-    var fill = document.getElementById('fgc-wbar-fill');
-    var wlbl = document.getElementById('fgc-wbar-lbl');
-    fill.style.width = Math.min(tw,100)+'%';
-    fill.style.background = tw > 100 ? '#ef4444' : '#17A99A';
-    wlbl.textContent = tw.toFixed(0)+'%';
-    wlbl.style.color = tw > 100 ? '#ef4444' : '#17A99A';
-
-    // Weighted score
-    var ws=0, fw=0;
-    rows.forEach(function(r){
-      if (r.got !== '' && r.tot > 0) {
-        ws += (parseFloat(r.got)/parseFloat(r.tot))*100*(parseFloat(r.w)||0)/100;
-        fw += parseFloat(r.w)||0;
+      if (isNaN(current) || isNaN(weight) || isNaN(desired)) {
+        alert('Please fill in all three fields.');
+        return;
       }
-    });
-
-    var sc = document.getElementById('fgc-s-current');
-    var sf = document.getElementById('fgc-s-final');
-    var sl = document.getElementById('fgc-s-letter');
-
-    if (fw === 0) {
-      sc.textContent = '—'; sf.textContent = '—'; sl.textContent = '—'; sl.style.color = '';
-      document.getElementById('fgc-result-card').style.display = 'none';
-      document.getElementById('fgc-grades-needed').style.display = 'none';
-      fgcDrawCharts([]);
-      return;
-    }
-
-    var cur = (ws/fw)*100;
-    var proj = tw > 0 ? (ws/tw)*100 : 0;
-    var lg = getLetter(proj);
-
-    sc.textContent = cur.toFixed(1)+'%';
-    sf.textContent = proj.toFixed(1)+'%';
-    sl.textContent = lg.l;
-    sl.style.color = lg.c;
-
-    // Result card
-    var rc = document.getElementById('fgc-result-card');
-    var gc = document.getElementById('fgc-grade-circle');
-    rc.style.display = 'block';
-    rc.style.borderColor = lg.c+'55';
-    gc.textContent = lg.l;
-    gc.style.color = lg.c;
-    gc.style.borderColor = lg.c;
-    gc.style.background = lg.c+'18';
-    var m = MSGS[lg.l] || ['',''];
-    document.getElementById('fgc-res-heading').textContent = m[0];
-    document.getElementById('fgc-res-heading').style.color = lg.c;
-    document.getElementById('fgc-res-msg').textContent = m[1];
-
-    // Grades needed for remaining
-    var rem = rows.filter(function(r){ return r.got === ''; });
-    var rw  = rem.reduce(function(s,r){ return s+(parseFloat(r.w)||0); }, 0);
-    var gn  = document.getElementById('fgc-grades-needed');
-    var gr  = document.getElementById('fgc-grades-row');
-    if (rw > 0) {
-      gn.style.display = 'block';
-      gr.innerHTML = '';
-      ['A+','A','B','C','D'].forEach(function(letter){
-        var t = GRADES.find(function(g){ return g.l === letter; });
-        var need = ((t.min/100*tw) - ws) / (rw/100);
-        var disp = need <= 0 ? 'Done!' : need > 100 ? 'N/A' : need.toFixed(0)+'%';
-        var col  = need <= 0 ? '#17A99A' : need > 100 ? '#ef4444' : t.c;
-        var cell = document.createElement('div');
-        cell.className = 'fgc-grade-cell';
-        cell.innerHTML = '<div class="fgc-gc-letter" style="color:'+col+'">'+letter+'</div><div class="fgc-gc-score">'+disp+'</div>';
-        gr.appendChild(cell);
-      });
-    } else {
-      gn.style.display = 'none';
-    }
-
-    fgcDrawCharts(rows.map(function(r){
-      return r.got !== '' && r.tot > 0
-        ? parseFloat(((parseFloat(r.got)/parseFloat(r.tot))*100).toFixed(1))
-        : 0;
-    }));
-  }
-
-  function fgcDrawCharts(scores) {
-    var lbls   = rows.map(function(r){ return r.name.length>12 ? r.name.slice(0,12)+'…' : r.name; });
-    var colors = rows.map(function(_,i){ return PALETTE[i%PALETTE.length]; });
-    if (bChart) bChart.destroy();
-    if (pChart) pChart.destroy();
-    bChart = new Chart(document.getElementById('fgcBarChart'), {
-      type:'bar',
-      data:{
-        labels:lbls,
-        datasets:[{
-          data:scores,
-          backgroundColor:colors.map(function(c){ return c+'cc'; }),
-          borderColor:colors, borderWidth:1.5,
-          borderRadius:7, borderSkipped:false
-        }]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{ legend:{display:false} },
-        scales:{
-          y:{ beginAtZero:true, max:100,
-              ticks:{color:'#94a3b8',font:{size:10},callback:function(v){return v+'%';}},
-              grid:{color:'rgba(0,0,0,0.05)'}},
-          x:{ ticks:{color:'#64748b',font:{size:10},autoSkip:false}, grid:{display:false} }
-        }
+      if (weight <= 0 || weight > 1) {
+        alert('Final exam weight must be between 1% and 100%.');
+        return;
       }
-    });
-    pChart = new Chart(document.getElementById('fgcPieChart'), {
-      type:'doughnut',
-      data:{
-        labels:rows.map(function(r){ return r.name; }),
-        datasets:[{
-          data:rows.map(function(r){ return parseFloat(r.w)||0; }),
-          backgroundColor:colors.map(function(c){ return c+'cc'; }),
-          borderColor:'#ffffff', borderWidth:2, hoverOffset:6
-        }]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{
-          legend:{display:true,position:'bottom',labels:{color:'#64748b',font:{size:10},boxWidth:10,padding:10}},
-          tooltip:{callbacks:{label:function(ctx){return ctx.label+': '+ctx.parsed+'%';}}}
-        },
-        cutout:'60%'
+
+      const required = (desired - current * (1 - weight)) / weight;
+      const rounded  = Math.ceil(required * 10) / 10;
+
+      resultDiv.style.display = 'block';
+
+      if (rounded > 100) {
+        resultBox.className = 'result-box bad';
+        resultScore.textContent = rounded.toFixed(1) + '%';
+        resultMsg.textContent = `Unfortunately, achieving a ${desired}% overall is not possible even with a perfect score. Consider speaking to your professor about extra credit.`;
+      } else if (rounded <= 0) {
+        resultBox.className = 'result-box good';
+        resultScore.textContent = '0%';
+        resultMsg.textContent = `Great news! You've already secured a ${desired}% or higher regardless of your final exam score.`;
+      } else {
+        const isEasy = rounded <= 60;
+        resultBox.className = isEasy ? 'result-box good' : 'result-box bad';
+        resultScore.textContent = rounded.toFixed(1) + '%';
+        const msg = isEasy
+          ? `That's very achievable! Study well and you'll hit your goal of ${desired}%.`
+          : `It's a stretch but doable. Focus your revision and aim for at least ${rounded.toFixed(1)}% on the final.`;
+        resultMsg.textContent = msg;
       }
-    });
-  }
-
-  // Final exam needed calculator
-  window.fgcCalcExam = function() {
-    var cur    = parseFloat(document.getElementById('fgc-ex-current').value);
-    var target = parseFloat(document.getElementById('fgc-ex-target').value);
-    var wt     = parseFloat(document.getElementById('fgc-ex-weight').value);
-    var scoreEl = document.getElementById('fgc-ex-score');
-    var subEl   = document.getElementById('fgc-ex-sub');
-    if (isNaN(cur)||isNaN(target)||isNaN(wt)||wt<=0||wt>100) {
-      scoreEl.textContent = '—'; subEl.textContent = 'Enter values to calculate';
-      return;
     }
-    var needed = (target - cur*(1-wt/100)) / (wt/100);
-    scoreEl.textContent = needed.toFixed(1)+'%';
-    if (needed > 100) {
-      scoreEl.style.color = '#ffcc80';
-      subEl.textContent = '⚠️ Not achievable — target too high';
-    } else if (needed <= 0) {
-      scoreEl.style.color = '#a0ffe8';
-      subEl.textContent = '✅ Already achieved your target!';
-    } else {
-      scoreEl.style.color = '#ffffff';
-      subEl.textContent = needed >= 85
-        ? '📚 High score needed — study hard!'
-        : needed >= 60
-        ? '👍 Achievable — stay focused!'
-        : '✅ You\'re in great shape!';
-    }
-  };
 
-  window.fgcResetAll = function() {
-    nid = 0;
-    document.getElementById('fgc-ex-current').value = '';
-    document.getElementById('fgc-ex-target').value  = '';
-    document.getElementById('fgc-ex-weight').value  = '';
-    document.getElementById('fgc-ex-score').textContent = '—';
-    document.getElementById('fgc-ex-sub').textContent   = 'Enter values to calculate';
-    fgcInit();
-  };
-
-  window.fgcExport = function() {
-    var cur  = document.getElementById('fgc-s-current').textContent;
-    var fin  = document.getElementById('fgc-s-final').textContent;
-    var let_ = document.getElementById('fgc-s-letter').textContent;
-    var txt  = '=== FINAL GRADE REPORT ===\nGradescalculate.com\n\n';
-    rows.forEach(function(r){
-      var p = r.got!==''&&r.tot>0 ? ((parseFloat(r.got)/parseFloat(r.tot))*100).toFixed(1)+'%' : 'N/A';
-      txt += r.name+': '+(r.got||'—')+'/'+r.tot+' ('+p+') | Weight: '+r.w+'%\n';
+    // Allow Enter key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') calculate();
     });
-    txt += '\nCurrent Grade : '+cur+'\nFinal Grade   : '+fin+'\nLetter Grade  : '+let_;
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([txt],{type:'text/plain'}));
-    a.download = 'final-grade-report.txt';
-    a.click();
-  };
-
-  fgcInit();
-})();
-</script>
+  </script>
+</body>
+</html>
